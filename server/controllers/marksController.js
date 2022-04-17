@@ -6,7 +6,7 @@ const Marks = require('../models/marksModel')
 // @access Public
 const getMarks = asyncHandler(async (req, res) => {
 	// Get all the marksheets
-	const marks = await Marks.find()
+	const marks = await Marks.find().sort({ percentage: -1 })
 	res.json(marks)
 })
 
@@ -26,6 +26,11 @@ const postMarks = asyncHandler(async (req, res) => {
 	) {
 		res.status(400)
 		throw new Error('Please fill in all the fields')
+	}
+
+	if ((req.body.math || req.body.chemistry || req.body.physics) > 100) {
+		res.status(400)
+		throw new Error('Marks cannot exceed 100')
 	}
 
 	// Calculating the percentage

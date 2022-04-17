@@ -26,6 +26,10 @@ h1 {
 	font-size: 4.5rem;
 }
 
+table > h3 {
+	font-size: 2em;
+}
+
 header {
 	background-color: #030303;
 	display: flex;
@@ -133,6 +137,7 @@ svg:hover {
 	position: absolute;
 	bottom: 0;
 	width: 100%;
+	margin-top: auto;
 }
 
 .footer > a {
@@ -184,6 +189,39 @@ svg:hover {
 	text-decoration: none;
 	border: none;
 	margin: 0 auto;
+}
+
+.form-btn > button:hover {
+	background-color: #0e1799;
+	cursor: pointer;
+}
+
+.redirect {
+	color: #303bdd;
+	font-size: 1em;
+}
+
+.redirect:hover {
+	color: #0e1799;
+}
+
+.rankItems {
+	display: grid;
+	justify-content: center;
+	align-items: center;
+}
+
+th {
+	padding: 0.5em;
+	padding-right: 2em;
+}
+
+td {
+	padding-right: 2em;
+	padding: 0.5em;
+}
+tbody {
+	text-align: left;
 }
 
 @media (max-width: 600px) {

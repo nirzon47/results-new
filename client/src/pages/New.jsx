@@ -25,7 +25,24 @@ function New() {
 	const onSubmit = (e) => {
 		e.preventDefault()
 
-		navigate('/')
+		axios({
+			method: 'post',
+			url: '/api/marks',
+			data: formData,
+		})
+			.then((res) => {
+				if (res.status === 200) {
+					navigate('/ranks')
+					toast.success('Success')
+				}
+			})
+			.catch((err) =>
+				toast.error(
+					'Please fill in all the fields and make sure the marks do not exceed 100.' +
+						'\n' +
+						err.message
+				)
+			)
 	}
 
 	return (
