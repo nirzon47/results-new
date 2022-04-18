@@ -6,7 +6,7 @@
 
 > A simple MERN app that has all the CRUD functionalities and shows all the marks of users in order of their total marks.
 
-### ✨ [Demo](w)
+### ✨ [Demo](https://nirzon-rankings.herokuapp.com/)
 
 ## Install
 
