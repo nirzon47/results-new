@@ -1,4 +1,6 @@
 const asyncHandler = require('express-async-handler')
+const req = require('express/lib/request')
+const res = require('express/lib/response')
 const Marks = require('../models/marksModel')
 
 // @desc Get marksheet
@@ -58,6 +60,21 @@ const putMarks = asyncHandler(async (req, res) => {
 		throw new Error('Marksheet not found')
 	}
 
+	if (
+		!req.body.name ||
+		!req.body.math ||
+		!req.body.chemistry ||
+		!req.body.physics
+	) {
+		res.status(400)
+		throw new Error('Please fill in all the fields')
+	}
+
+	if ((req.body.math || req.body.chemistry || req.body.physics) > 100) {
+		res.status(400)
+		throw new Error('Marks cannot exceed 100')
+	}
+
 	let math = Number(req.body.math)
 	let chemistry = Number(req.body.chemistry)
 	let physics = Number(req.body.physics)
@@ -79,4 +96,20 @@ const putMarks = asyncHandler(async (req, res) => {
 	res.json(updatedMarks)
 })
 
-module.exports = { getMarks, postMarks, putMarks }
+// @desc delete an entry in marksheet
+// @route DELETE /api/marks/:id
+// @access Public
+const deleteMarks = asyncHandler(async (req, res) => {
+	const marks = await Marks.findById(req.params.id)
+
+	// Check if the entry exists
+	if (!marks) {
+		res.status(400)
+		throw new Error('Entry not found')
+	}
+
+	await marks.remove()
+	res.status(200).json({ id: req.params.id })
+})
+
+module.exports = { getMarks, postMarks, putMarks, deleteMarks }

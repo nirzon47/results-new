@@ -1,21 +1,27 @@
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import RankItems from '../components/RankItems'
 import { Link } from 'react-router-dom'
+import Spinner from '../components/Spinner'
 
 function Ranks() {
 	const [Items, setItems] = useState([])
+	const [Loading, setLoading] = useState(true)
 
-	useEffect(() => {
-		axios
+	const getEntries = useCallback(async () => {
+		await axios
 			.get('/api/marks')
 			.then((res) => {
-				console.log(res.data)
 				setItems(res.data)
+				setLoading(false)
 			})
 			.catch((err) => toast.error(err.message))
-	}, [])
+	}, [setItems])
+
+	useEffect(() => {
+		getEntries()
+	})
 
 	return (
 		<>
@@ -24,7 +30,9 @@ function Ranks() {
 			</div>
 
 			<div className='content'>
-				{Items.length > 0 ? (
+				{Loading ? (
+					<Spinner />
+				) : Items.length > 0 ? (
 					<div className='rankItems'>
 						<table>
 							<thead>
@@ -34,6 +42,8 @@ function Ranks() {
 									<th>Maths</th>
 									<th>Physics</th>
 									<th>Percentage</th>
+									<th>Edit</th>
+									<th>Delete</th>
 								</tr>
 							</thead>
 							<tbody>

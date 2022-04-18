@@ -36,11 +36,9 @@ function New() {
 					toast.success('Success')
 				}
 			})
-			.catch((err) =>
+			.catch(() =>
 				toast.error(
-					'Please fill in all the fields and make sure the marks do not exceed 100.' +
-						'\n' +
-						err.message
+					'Please fill in all the fields and make sure the marks do not exceed 100.'
 				)
 			)
 	}

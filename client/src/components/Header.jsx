@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { FaPlus, FaEdit, FaSearch } from 'react-icons/fa'
+import { FaPlus, FaSearch } from 'react-icons/fa'
 
 function Header() {
 	return (
@@ -12,11 +12,6 @@ function Header() {
 					<li>
 						<Link to='/new' title='Add a new Entry'>
 							<FaPlus />
-						</Link>
-					</li>
-					<li>
-						<Link to='/edit' title='Edit an existing entry'>
-							<FaEdit />
 						</Link>
 					</li>
 					<li>
